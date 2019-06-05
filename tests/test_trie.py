@@ -8,12 +8,10 @@ from ambigtree import AmbiguousTrie
     (('ATCG', 'GCTA'),)
 )
 def test_set(keys):
-    tree = AmbiguousTrie()
-    for i, k in enumerate(keys):
-        tree[k] = i
+    trie = AmbiguousTrie(initialize=[(k, i) for i, k in enumerate(keys)])
 
     for i, k in enumerate(keys):
-        assert tree[k].value == i
+        assert trie[k].value == i
 
 
 @pytest.mark.parametrize(
@@ -49,17 +47,37 @@ def test_set(keys):
             'NTCG',
             ('ATCG', 'ANCG')
         ),
-
+        (
+            ('ATCG', 'GCTA', 'TTNA'),
+            'TNGA',
+            ('TTNA',)
+        )
     ]
 )
 def test_ambig_match(inputs, pattern, expected):
-    tree = AmbiguousTrie()
-    for key in inputs:
-        tree[key] = key
-    assert sorted(tree.get_matches(pattern)) == sorted(expected)
+    trie = AmbiguousTrie(initialize=[(k, k) for k in inputs])
+
+    assert sorted(trie.get_matches(pattern)) == sorted(expected)
 
 
 def test_invalid():
-    tree = AmbiguousTrie()
+    trie = AmbiguousTrie()
     with pytest.raises(ValueError):
-        list(tree.children_matching('bad'))
+        list(trie.children_matching('bad'))
+
+
+@pytest.mark.parametrize(
+    'inputs',
+    [
+        (('ATCG', 'ATCN', 'NNNN', 'GCTA'),)
+    ]
+)
+def test_values(inputs):
+    trie = AmbiguousTrie(initialize=[(k, k) for k in inputs])
+
+    assert sorted(trie.values()) == sorted(inputs)
+
+
+def test_repr():
+    trie = AmbiguousTrie(key='abc', value=456)
+    assert trie.__repr__() == 'AmbiguousTrie(abc, 456)'
