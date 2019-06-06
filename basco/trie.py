@@ -1,10 +1,10 @@
-class AmbiguousTrie:
+class Trie:
     """Creates a trie which stores potentially ambiguous (i.e. wildcard)
     characters.  Inserting into the trie is essentially the same as a
     normal trie, but lookups take into account the ambiguous character both
     in the query string and strings to be matched
 
-    For examplean AmbiguousTrie containing the strings ATCG, ANTT, and ANCG
+    For examplean Trie containing the strings ATCG, ANTT, and ANCG
     when queried with ``get_matches('NTCG')`` will return ATCG and ANCG.
 
     key: The character representing the trie node.
@@ -12,9 +12,9 @@ class AmbiguousTrie:
             node.
     ambig_char: The character representing ambiguity.
     initialize: Pairs of values with which to initialize the trie.  Calling
-        `AmbiguousTrie(defaults)` is equivalent to:
+        `Trie(defaults)` is equivalent to:
 
-        trie = AmbiguousTrie()
+        trie = Trie()
         for k, v in defaults:
             trie[k] = v
 
@@ -44,7 +44,7 @@ class AmbiguousTrie:
         while True:
             prefix, rest = key[0], key[1:]
             node = node.children.setdefault(
-                prefix, AmbiguousTrie(prefix, ambig_char=self.ambig_char)
+                prefix, Trie(prefix, ambig_char=self.ambig_char)
             )
             if not rest:
                 node.value = value
@@ -52,7 +52,7 @@ class AmbiguousTrie:
             key = rest
 
     def __repr__(self):
-        return f'AmbiguousTrie({self.key}, {self.value})'
+        return f'basco.Trie({self.key}, {self.value})'
 
     def values(self):
         """Gets all values inserted into the trie"""

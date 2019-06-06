@@ -1,3 +1,3 @@
 #!/bin/bash
 
-pytest --cov=ambigtree -s -v tests/
+pytest --cov=basco -s -v tests/

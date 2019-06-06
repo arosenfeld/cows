@@ -1,7 +1,7 @@
-from .trie import AmbiguousTrie
+from .trie import Trie
 
 
-class ReducedDict:
+class Dict:
     """Creates a dict-like object which checks that no matching key exists
     before setting a value.  If one or more ambiguous matches do exist,
     optionally update one.
@@ -14,23 +14,27 @@ class ReducedDict:
         ambiguous match to `key` already exists.  Takes a single argument of
         the value assocated with the ambiguous match which it can then mutate
         (e.g. increment a counter).  Return value is ignored.
-    **kwargs: Passed to underlying AmbiguousTrie
+    **kwargs: Passed to underlying Trie
 
 
     """
     def __init__(self, selector=None, updater=None, **kwargs):
-        initialize = kwargs.pop('initialize')
+        initialize = kwargs.pop('initialize', None)
 
         self.selector = selector or (lambda l: sorted(l)[0])
         self.updater = updater
-        self.trie = AmbiguousTrie(**kwargs)
+        self.trie = Trie(**kwargs)
 
-        # This needs to override the same loop in AmbiguousTrie because
+        # This needs to override the same loop in Trie because
         # __setitem__ processes calls before calling the same method in
-        # AmbiguousTrie
+        # Trie
         if initialize:
             for init_key, init_val in initialize:
                 self[init_key] = init_val
+
+    def values(self):
+        """Gets all values inserted into the ReducedDict"""
+        return self.trie.values()
 
     def __setitem__(self, key, value):
         """Sets an `key` to `value` if no match for `key` already exists.  If a
@@ -49,6 +53,5 @@ class ReducedDict:
     def __len__(self):
         return len([l for l in self.values()])
 
-    def values(self):
-        """Gets all values inserted into the ReducedDict"""
-        return self.trie.values()
+    def __repr__(self):
+        return f'basco.Dict()'

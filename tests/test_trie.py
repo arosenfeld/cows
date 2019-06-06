@@ -1,6 +1,6 @@
 import pytest
 
-from ambigtree import AmbiguousTrie
+import basco
 
 
 @pytest.mark.parametrize(
@@ -8,7 +8,7 @@ from ambigtree import AmbiguousTrie
     (('ATCG', 'GCTA'),)
 )
 def test_set(keys):
-    trie = AmbiguousTrie(initialize=[(k, i) for i, k in enumerate(keys)])
+    trie = basco.Trie(initialize=[(k, i) for i, k in enumerate(keys)])
 
     for i, k in enumerate(keys):
         assert trie[k].value == i
@@ -55,13 +55,13 @@ def test_set(keys):
     ]
 )
 def test_ambig_match(inputs, pattern, expected):
-    trie = AmbiguousTrie(initialize=[(k, k) for k in inputs])
+    trie = basco.Trie(initialize=[(k, k) for k in inputs])
 
     assert sorted(trie.get_matches(pattern)) == sorted(expected)
 
 
 def test_invalid():
-    trie = AmbiguousTrie()
+    trie = basco.Trie()
     with pytest.raises(ValueError):
         list(trie.children_matching('bad'))
 
@@ -73,11 +73,11 @@ def test_invalid():
     ]
 )
 def test_values(inputs):
-    trie = AmbiguousTrie(initialize=[(k, k) for k in inputs])
+    trie = basco.Trie(initialize=[(k, k) for k in inputs])
 
     assert sorted(trie.values()) == sorted(inputs)
 
 
 def test_repr():
-    trie = AmbiguousTrie(key='abc', value=456)
-    assert trie.__repr__() == 'AmbiguousTrie(abc, 456)'
+    trie = basco.Trie(key='abc', value=456)
+    assert trie.__repr__() == 'basco.Trie(abc, 456)'

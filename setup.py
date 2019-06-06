@@ -1,14 +1,12 @@
-import os
-
-from setuptools import setup, Extension
+from setuptools import setup
 
 setup(
-    name='ambitree',
-    version='0.0.1',
+    name='basco',
+    version='1.0.0',
     author='Aaron M. Rosenfeld',
     author_email='aaron@rosenfeld.io',
-    url='https://github.com/arosenfeld/ambitree',
+    url='https://github.com/arosenfeld/basco',
     packages=[
-        'ambigtree',
+        'basco',
     ],
 )

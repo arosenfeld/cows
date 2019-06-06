@@ -1,6 +1,6 @@
 import pytest
 
-from ambigtree import ReducedDict
+import basco
 
 
 @pytest.mark.parametrize(
@@ -13,7 +13,7 @@ from ambigtree import ReducedDict
     ]
 )
 def test_initialize(keys, expected):
-    rdict = ReducedDict(initialize=[(k, k) for k in keys])
+    rdict = basco.Dict(initialize=[(k, k) for k in keys])
     assert sorted(rdict.values()) == sorted(expected)
 
 
@@ -41,7 +41,7 @@ def test_update(keys, expected):
         def __gt__(self, other):
             return self.counter > other.counter
 
-    rdict = ReducedDict(
+    rdict = basco.Dict(
         updater=_updater,
         initialize=[(k, _TestObj(k)) for k in keys]
     )
@@ -52,3 +52,8 @@ def test_update(keys, expected):
     for k, v in expected.items():
         assert len(list(rdict[k])) == 1
         assert next(rdict[k]).counter == v
+
+
+def test_repr():
+    trie = basco.Dict()
+    assert trie.__repr__() == 'basco.Dict()'
