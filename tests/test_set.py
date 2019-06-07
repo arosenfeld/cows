@@ -3,8 +3,8 @@ import pytest
 import basco
 
 test_set = [(
-    ('ABCD', 'NEFG', 'T', 'ABCN', 'HEFN'),
-    ('ABCD', 'NEFG', 'T')
+    ('ABCD', '*EFG', 'T', 'ABC*', 'HEF*'),
+    ('ABCD', '*EFG', 'T')
 )]
 
 
@@ -24,6 +24,8 @@ def test_add(keys, expected):
     assert len(rset) == len(expected)
     for key in rset:
         assert key in expected
+    for key in expected:
+        assert key in rset
 
 
 def test_repr():

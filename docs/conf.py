@@ -52,3 +52,10 @@ html_theme = 'alabaster'
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+
+html_theme_options = {
+    'github_user': 'arosenfeld',
+    'github_repo': 'basco',
+    'description': 'Simple, efficient collections for strings with wilcards',
+    'fixed_sidebar': True
+}

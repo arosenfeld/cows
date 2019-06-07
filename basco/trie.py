@@ -16,17 +16,17 @@ class Trie:
         key (char): The character representing the trie node.
         value (object): An arbitrary Python object representing the data at the
             trie node.
-        ambig_char (char): The character representing ambiguity.
+        wildcard (char): The character representing ambiguity.
         initialize (tuple): Pairs of values with which to initialize the trie.
 
 
     """
-    def __init__(self, key=None, value=_EMPTY, ambig_char='N',
+    def __init__(self, key=None, value=_EMPTY, wildcard='*',
                  initialize=None):
         self.children = {}
         self.key = key
         self.value = value
-        self.ambig_char = ambig_char
+        self.wildcard = wildcard
 
         if initialize:
             for init_key, init_val in initialize:
@@ -46,7 +46,7 @@ class Trie:
         while True:
             prefix, rest = key[0], key[1:]
             node = node.children.setdefault(
-                prefix, Trie(prefix, ambig_char=self.ambig_char)
+                prefix, Trie(prefix, wildcard=self.wildcard)
             )
             if not rest:
                 node.value = value
@@ -116,13 +116,13 @@ class Trie:
         if not (isinstance(prefix, str) and len(prefix) == 1):
             raise ValueError('Prefix must be a single character')
 
-        if prefix == self.ambig_char:
+        if prefix == self.wildcard:
             yield from self.children.values()
         else:
             if prefix in self.children:
                 yield self.children[prefix]
-            if self.ambig_char in self.children:
-                yield self.children[self.ambig_char]
+            if self.wildcard in self.children:
+                yield self.children[self.wildcard]
 
     def get_matches(self, key):
         """Searches the trie for strings matching ``key``.

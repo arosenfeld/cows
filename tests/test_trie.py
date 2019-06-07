@@ -20,39 +20,39 @@ def test_set(keys):
     'inputs,pattern,expected',
     [
         (
-            ('ATCG', 'ANTT', 'CTCG'),
-            'NTCG',
+            ('ATCG', 'A*TT', 'CTCG'),
+            '*TCG',
             ('ATCG', 'CTCG')
         ),
         (
-            ('ATCG', 'ANTT', 'CTCG'),
+            ('ATCG', 'A*TT', 'CTCG'),
             'ATTT',
-            ('ANTT',)
+            ('A*TT',)
         ),
         (
-            ('ATCG', 'ANTT', 'CTCG'),
+            ('ATCG', 'A*TT', 'CTCG'),
             'ATC',
             ()
         ),
         (
-            ('ATCG', 'ANTT', 'CTCG'),
-            'NTC',
+            ('ATCG', 'A*TT', 'CTCG'),
+            '*TC',
             ()
         ),
         (
-            ('ATCG', 'ANTT', 'CTCG'),
-            'NNNN',
-            ('ATCG', 'ANTT', 'CTCG')
+            ('ATCG', 'A*TT', 'CTCG'),
+            '****',
+            ('ATCG', 'A*TT', 'CTCG')
         ),
         (
-            ('ATCG', 'ANTT', 'ANCG'),
-            'NTCG',
-            ('ATCG', 'ANCG')
+            ('ATCG', 'A*TT', 'A*CG'),
+            '*TCG',
+            ('ATCG', 'A*CG')
         ),
         (
-            ('ATCG', 'GCTA', 'TTNA'),
-            'TNGA',
-            ('TTNA',)
+            ('ATCG', 'GCTA', 'TT*A'),
+            'T*GA',
+            ('TT*A',)
         )
     ]
 )
@@ -76,7 +76,7 @@ def test_repr():
 @pytest.mark.parametrize(
     'inputs',
     [
-        (('ABC', 1), ('DEF', 2), ('DEN', 5)),
+        (('ABC', 1), ('DEF', 2), ('DE*', 5)),
     ]
 )
 def test_items(inputs):

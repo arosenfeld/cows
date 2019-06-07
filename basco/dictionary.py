@@ -143,6 +143,10 @@ class Dict:
         """
         return self.trie.items(extract_values=True)
 
+    def __iter__(self):
+        """Yields the keys in the dictionary"""
+        yield from self.keys()
+
     def __setitem__(self, key, value):
         """Sets a value in the dictionary.
 
@@ -175,7 +179,9 @@ class Dict:
         yield from (m[1].value for m in self.trie.get_matches(key))
 
     def __len__(self):
+        """Returns the number of elements in the dictionary."""
         return len([l for l in self.values()])
 
     def __repr__(self):
+        """Returns the representation of the dictionary"""
         return f'basco.Dict()'

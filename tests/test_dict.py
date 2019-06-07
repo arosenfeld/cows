@@ -7,7 +7,7 @@ import basco
     'keys,expected',
     [
         (
-            ('ATCG', 'GCTA', 'NNNN'),
+            ('ATCG', 'GCTA', '****'),
             ('ATCG', 'GCTA')
         )
     ]
@@ -21,8 +21,8 @@ def test_initialize(keys, expected):
     'keys,expected',
     [
         (
-            (('ATCG', 1), ('GCTA', 2), ('TTNA', 3), ('TNGA', 4), ('NNNN', 5)),
-            {'ATCG': 6, 'GCTA': 2, 'TTNA': 7}
+            (('ATCG', 1), ('GCTA', 2), ('TT*A', 3), ('T*GA', 4), ('****', 5)),
+            {'ATCG': 6, 'GCTA': 2, 'TT*A': 7}
         )
     ]
 )
@@ -33,14 +33,23 @@ def test_update(keys, expected):
     rdict = basco.Dict(updater=incr, initialize=keys)
 
     assert len(rdict) == len(expected)
+
+    # To cover .items()
     for key, value in rdict.items():
         assert expected[key] == value
+
+    # To cover __iter__
+    for key in rdict:
+        assert [expected[key]] == list(rdict[key])
+
 
     for k, v in expected.items():
         vals = list(rdict[k])
         assert len(vals) == 1
         assert next(rdict[k]) == v
 
+
 def test_repr():
     rdict = basco.Dict()
     assert rdict.__repr__() == 'basco.Dict()'
+
