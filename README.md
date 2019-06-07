@@ -1,5 +1,7 @@
 # cows
 
+[![Build Status](https://travis-ci.org/arosenfeld/cows.svg?branch=master)](https://travis-ci.org/arosenfeld/cows)
+[![codecov](https://codecov.io/gh/arosenfeld/cows/branch/master/graph/badge.svg)](https://codecov.io/gh/arosenfeld/cows)
 [![Documentation Status](https://readthedocs.org/projects/cows/badge/?version=latest)](https://cows.readthedocs.io/en/latest/?badge=latest)
 
 **cows** (**co**llections for **w**ildcard **s**trings) is a Python library
