@@ -1,5 +1,5 @@
-cows
-=================================
+cows: Collections for wildcard strings
+======================================
 
 .. toctree::
     :hidden:
@@ -7,39 +7,43 @@ cows
     data_structures
 
 **cows** (**co**\ llections for **w**\ ildcard **s**\ trings) is a Python
-library that provides efficient ``set``- and ``dict``-like collections where
-equality checking allows for wildcards in both the search string **and** the
-strings already in the collection.
+library that provides efficient collection implementations where equality
+checking allows for wildcards in both the search string and the strings already
+in the collection.
 
 Motivation
 ----------
 
 cows was developed for a common problem in bioinformatics: given a set of DNA
-sequences with the alphabet ``[A, T, C, G]``, along with a wildcard ``N``
-(indicating that the base is unknown), find the unique sequences and perform
-some operation on them.  Maybe we want to count how many times each unique
-sequence is found or for each unique sequence, generate a consensus sequence.
+sequences with the alphabet ``A``, ``T``, ``C``, ``G``, along with a wildcard
+``N`` (indicating that the base is unknown), find the unique sequences and
+perform some operation on them.  Examples of the operation are: counting how
+many times each unique sequence occurs and generate a consensus sequence for
+each unique sequence.
 
-For a simple example, one may want to count how many times each distinct
-sequence occurs:
+For a simple example, for counting unique sequences consider the following
+input and desired output:
 
 .. code-block:: none
 
-    input     output
-    -----     ------
-    ATNG      ATNG 2 # Comprised of ATNG and ATCN
-    ATCN      ANNT 1
-    ANNT      GTTC 1
+    input           output
+    -----           ------
+    ATNG            ATNG 2 # Comprised of ATNG and ATCN
+    ATCN            ANNT 1
+    ANNT            GTTC 1
     GTTC
 
 Notice this task requires comparing strings with wilcards not just in one
-string, but in both.  Naively one could pairwise compare the sequences, ignore
-the positions where either contains an ``N``, and check if the other positions
-match.  However, this quickly becomes time-consuming as it scales with the
-square of the number of sequences.
+string, but in both.  For example, matching ``ATCN`` to ``ATNG`` requires that
+the third and fourth characters both be considered wildcards.
 
-cows uses a modified Trie (:class:`cows.Trie`) to reduce this complexity to
-scale linearly with the number of sequences.
+Naively one could pairwise compare the sequences, ignore the positions where
+either contains an ``N``, and check if all other positions match.  However,
+this quickly becomes intractable as it scales with the square of the number of
+sequences.
+
+cows uses a modified implementation of atrie (:class:`cows.trie`) to reduce
+this complexity to scale linearly with the number of sequences.
 
 Provided Data Structures
 ------------------------
@@ -61,7 +65,7 @@ into account ambiguity.  For example:
 
     print(l.index('D***'))
 
-The of the print statement is ``2`` since the first match for ``D***`` is at
+The print statement outputs ``2`` since the first match for ``D***`` is at
 position 2 (with a value of ``****``).
 
 
