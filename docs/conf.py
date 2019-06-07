@@ -60,3 +60,5 @@ html_theme_options = {
     'fixed_sidebar': True,
     'sidebar_collapse': False
 }
+
+master_doc = 'index'
