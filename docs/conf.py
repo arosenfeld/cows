@@ -17,7 +17,7 @@
 
 # -- Project information -----------------------------------------------------
 
-project = 'basco'
+project = 'cows'
 copyright = '2019, Aaron M. Rosenfeld'
 author = 'Aaron M. Rosenfeld'
 
@@ -55,7 +55,7 @@ html_static_path = ['_static']
 
 html_theme_options = {
     'github_user': 'arosenfeld',
-    'github_repo': 'basco',
+    'github_repo': 'cows',
     'description': 'Simple, efficient collections for strings with wildcards',
     'fixed_sidebar': True,
     'sidebar_collapse': False

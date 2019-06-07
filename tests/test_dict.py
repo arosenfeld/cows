@@ -1,6 +1,6 @@
 import pytest
 
-import basco
+import cows
 
 
 @pytest.mark.parametrize(
@@ -13,7 +13,7 @@ import basco
     ]
 )
 def test_initialize(keys, expected):
-    rdict = basco.Dict(initialize=[(k, k) for k in keys])
+    rdict = cows.Dict(initialize=[(k, k) for k in keys])
     assert sorted(rdict.keys()) == sorted(expected)
 
 
@@ -30,7 +30,7 @@ def test_update(keys, expected):
     def incr(match, current_value, new_value):
         return current_value + new_value
 
-    rdict = basco.Dict(updater=incr, initialize=keys)
+    rdict = cows.Dict(updater=incr, initialize=keys)
 
     assert len(rdict) == len(expected)
 
@@ -49,5 +49,5 @@ def test_update(keys, expected):
 
 
 def test_repr():
-    rdict = basco.Dict()
-    assert rdict.__repr__() == 'basco.Dict()'
+    rdict = cows.Dict()
+    assert rdict.__repr__() == 'cows.Dict()'

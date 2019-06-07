@@ -1,6 +1,6 @@
 #!/bin/bash
 
-pytest --cov=basco -s -v tests/ --tb=native
+pytest --cov=cows -s -v tests/ --tb=native
 
-pycodestyle basco tests
-pylint basco
+pycodestyle cows tests
+pylint cows

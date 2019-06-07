@@ -1,12 +1,12 @@
 from setuptools import setup
 
 setup(
-    name='basco',
+    name='cows',
     version='1.0.0',
     author='Aaron M. Rosenfeld',
     author_email='aaron@rosenfeld.io',
-    url='https://github.com/arosenfeld/basco',
+    url='https://github.com/arosenfeld/cows',
     packages=[
-        'basco',
+        'cows',
     ],
 )

@@ -1,4 +1,4 @@
-basco
+cows
 =================================
 
 .. toctree::
@@ -6,14 +6,15 @@ basco
 
     data_structures
 
-**basco** (**b**\ idirectional **a**\ mbiguous **s**\ tring **co**\ llections)
-is a Python library that provides efficient ``set``- and ``dict``-like
-collections where equality checking allows for wildcards in both the search
-string **and** the strings already in the collection.
+**cows** (**co**\ llections for **w**\ ildcard **s**\ trings) is a Python
+library that provides efficient ``set``- and ``dict``-like collections where
+equality checking allows for wildcards in both the search string **and** the
+strings already in the collection.
+
 Motivation
 ----------
 
-basco was developed for a common problem in bioinformatics: given a set of DNA
+cows was developed for a common problem in bioinformatics: given a set of DNA
 sequences with the alphabet ``[A, T, C, G]``, along with a wildcard ``N``
 (indicating that the base is unknown), find the unique sequences and perform
 some operation on them.  Maybe we want to count how many times each unique
@@ -37,26 +38,26 @@ the positions where either contains an ``N``, and check if the other positions
 match.  However, this quickly becomes time-consuming as it scales with the
 square of the number of sequences.
 
-basco uses a modified Trie (:class:`basco.Trie`) to reduce this complexity to
+cows uses a modified Trie (:class:`cows.Trie`) to reduce this complexity to
 scale linearly with the number of sequences.
 
 Provided Data Structures
 ------------------------
 
-Below are examples for the data structures included with basco.  Please see the
+Below are examples for the data structures included with cows.  Please see the
 documentation in :ref:`data-structures` for detailed
 API information.
 
-``basco.List``
+``cows.List``
 ^^^^^^^^^^^^^^
 
-A :class:`basco.list` is a simple list implementation where insertion functions
+A :class:`cows.list` is a simple list implementation where insertion functions
 similarly to the builtin ``list`` data structure, but accessor methods take
 into account ambiguity.  For example:
 
 .. code-block:: python
 
-    l = basco.List(['ABCD', 'ABC*', '****', 'DEFG'])
+    l = cows.List(['ABCD', 'ABC*', '****', 'DEFG'])
 
     print(l.index('D***'))
 
@@ -64,20 +65,20 @@ The of the print statement is ``2`` since the first match for ``D***`` is at
 position 2 (with a value of ``****``).
 
 
-``basco.Set``
+``cows.Set``
 ^^^^^^^^^^^^^
 
-A :class:`basco.set` stores unique strings similar to the builtin ``set`` data
+A :class:`cows.set` stores unique strings similar to the builtin ``set`` data
 structure.  Instead of using hashes for equality checks, the underlying
-:class:`basco.trie` is used to check if the pattern being inserted matches any
+:class:`cows.trie` is used to check if the pattern being inserted matches any
 existing member of the set, taking into account wildcards in both.  For
 example:
 
 .. code-block:: python
 
-    import basco
+    import cows
 
-    s = basco.Set(wildcard='*')
+    s = cows.Set(wildcard='*')
     s.add('ABCD')
     s.add('*EFG')
     s.add('T')
@@ -90,13 +91,13 @@ Produces:
 
 .. code-block:: none
 
-    basco.Set(['*EFG', 'ABCD', 'T'])
+    cows.Set(['*EFG', 'ABCD', 'T'])
 
 
-``basco.Dict``
+``cows.Dict``
 ^^^^^^^^^^^^^^
 
-basco dictionaries are similar to the builtin ``dict`` type insofar as they are
+cows dictionaries are similar to the builtin ``dict`` type insofar as they are
 key/value stores.  They have a few key differences, however
 
 First, when setting a value, if there is an existing (potentially ambiguous)
@@ -106,16 +107,16 @@ key, because of ambiguity, multiple existing keys may match.  Providing a
 ``selector`` function lets you define to which of the matches the ``updater``
 should be applied.
 
-See :class:`basco.dictionary` for more detailed information.
+See :class:`cows.dictionary` for more detailed information.
 
 .. code-block:: python
 
-    import basco
+    import cows
 
     def increment(match, old_value, new_value):
         return old_value + new_value
 
-    my_dict = basco.Dict(updater=increment)
+    my_dict = cows.Dict(updater=increment)
     my_dict['ABC'] = 1
     my_dict['DEF'] = 2
     my_dict['AB*'] = 10
@@ -130,14 +131,14 @@ Produces:
     ABC --> 11
     DEF --> 2
 
-basco.Trie
+cows.Trie
 ^^^^^^^^^^
 .. note::
 
-    Generally the :class:`basco.trie` data structure shouldn't be used
+    Generally the :class:`cows.trie` data structure shouldn't be used
     directly.  Consider using one of its abstractions.
 
-All other basco data structures are based on the :class:`basco.trie` class.  It
+All other cows data structures are based on the :class:`cows.trie` class.  It
 allows for ambiguous queries taking into account wildcards both in the query
 string and elements in the trie.
 
@@ -145,9 +146,9 @@ An example of it's use:
 
 .. code-block:: python
 
-    import basco
+    import cows
 
-    t = basco.Trie()
+    t = cows.Trie()
     t['ABCD'] = 1
     t['DE*G'] = 5
 
@@ -158,13 +159,13 @@ Outputs:
 
 .. code-block:: none
 
-    Matches for ABC* [('ABCD', basco.Trie(D, 1))]
-    Matches for D*FG [('DE*G', basco.Trie(G, 5))]
+    Matches for ABC* [('ABCD', cows.Trie(D, 1))]
+    Matches for D*FG [('DE*G', cows.Trie(G, 5))]
 
 
 Performance
 -----------
-basco is performant, requiring *O(n)* time for insertions and lookups with
+cows is performant, requiring *O(n)* time for insertions and lookups with
 an input size of *n* strings.  The naive approach which is currently quite
 common involves pairwise comparing the sequences in a collection resulting in
 *O(n*\ :sup:`2`\ *)*, quickly becoming intractable.

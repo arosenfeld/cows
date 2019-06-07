@@ -1,6 +1,6 @@
-# basco
+# cows
 
-_basco_ (Bidirectional Ambiguous String COllections) is an efficient
+_cows_ (Bidirectional Ambiguous String COllections) is an efficient
 implementation of the dict, set, and trie data structures where where keys are
 allowed to have ambiguous characters (wildcards).  Unlike the built-in
 data-structures, when determining if a key `k` is present in the collection
@@ -16,7 +16,7 @@ It's primary use cases are:
 
 ## Examples
 
-### `basco.Set`
+### `cows.Set`
 
 Given the wildcard `*` and the strings:
 
@@ -27,14 +27,14 @@ WXYZ*
 ****A
 ```
 
-An `basco.Set` could produce the strings:
+An `cows.Set` could produce the strings:
 
 ```
 AB*CD
 WXYZ*
 ```
 
-### `basco.Dict`
+### `cows.Dict`
 
 Given the key/value pairs:
 
@@ -45,7 +45,7 @@ WXYZ*   3
 ****A   4
 ```
 
-An `basco.Dict` where the reduction function adds values together could produce:
+An `cows.Dict` where the reduction function adds values together could produce:
 
 ```
 AB*CD   3
@@ -54,12 +54,12 @@ WXYZ*   7
 
 ## Complexity
 
-_basco_ was written because there did not appear to be an efficient method of
+_cows_ was written because there did not appear to be an efficient method of
 comparing one string to a collection of other strings where both the search
 string and strings inthe collection could contain wildcards.  Most other
 libraries pair-wise compare the values which quickly becomes inefficient.
 
-All _basco_ data structures are built on top of the `basco.Trie` class.  Given an
+All _cows_ data structures are built on top of the `cows.Trie` class.  Given an
 input list of size `n` with maximum string of length `m`, the complexity is:
 
 | Function  | Complexity |
@@ -69,4 +69,4 @@ input list of size `n` with maximum string of length `m`, the complexity is:
 | Iteration | O(m)      |
 
 So, for situations where the search string length, `m`, is less than the number
-of strings to be searched, `n`, _basco_ should outperform the naive approach.
+of strings to be searched, `n`, _cows_ should outperform the naive approach.

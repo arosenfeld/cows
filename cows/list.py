@@ -14,16 +14,16 @@ class List:
 
     .. code-block:: python
 
-        import basco
+        import cows
 
-        l = basco.List(['ABCD', 'ABC*', 'DEFG'])
+        l = cows.List(['ABCD', 'ABC*', 'DEFG'])
         print(l)
-        # prints: basco.List(['ABCD', 'ABC*', 'DEFG'])
+        # prints: cows.List(['ABCD', 'ABC*', 'DEFG'])
 
         l.insert(2, '****')
 
         print(l)
-        # print: basco.List(['ABCD', 'ABC*', '****', 'DEFG'])
+        # print: cows.List(['ABCD', 'ABC*', '****', 'DEFG'])
 
         print(l.index('D***'))
         # prints: 2
@@ -47,7 +47,7 @@ class List:
 
     def __repr__(self):
         """Returns the representation of the list"""
-        return f'basco.List({[e for e in self]})'
+        return f'cows.List({[e for e in self]})'
 
     def __len__(self):
         """Returns the number of elements in the list"""
@@ -81,7 +81,7 @@ class List:
 
             .. code-block:: python
 
-                l = basco.List(['ABCD', 'ABC*', '****', 'DEFG'])
+                l = cows.List(['ABCD', 'ABC*', '****', 'DEFG'])
 
                 print(l.index('D***'))
 

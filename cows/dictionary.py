@@ -34,12 +34,12 @@ class Dict:
     Example:
         .. code-block:: python
 
-            import basco
+            import cows
 
             def increment(match, old_value, new_value):
                 return old_value + new_value
 
-            my_dict = basco.Dict(updater=increment)
+            my_dict = cows.Dict(updater=increment)
             my_dict['ABC'] = 1
             my_dict['DEF'] = 2
             my_dict['AB*'] = 10
@@ -59,7 +59,7 @@ class Dict:
         .. code-block:: python
 
             ...
-            my_dict = basco.Dict(updater=increment)
+            my_dict = cows.Dict(updater=increment)
             my_dict['ABC'] = 1
             my_dict['*EF'] = 2
             my_dict['GHF'] = 3
@@ -89,7 +89,7 @@ class Dict:
             def last_match(matches):
                 return sorted(matches, key=lambda m: m[0], reverse=True)[0]
 
-            my_dict = basco.Dict(updater=increment, selector=last_match)
+            my_dict = cows.Dict(updater=increment, selector=last_match)
             ...
 
 
@@ -184,4 +184,4 @@ class Dict:
 
     def __repr__(self):
         """Returns the representation of the dictionary"""
-        return f'basco.Dict()'
+        return f'cows.Dict()'

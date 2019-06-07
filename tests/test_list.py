@@ -1,6 +1,6 @@
 import pytest
 
-import basco
+import cows
 
 
 test_set = [
@@ -10,13 +10,13 @@ test_set = [
 
 @pytest.mark.parametrize('elements', test_set)
 def test_initialize(elements):
-    rlist = basco.List(elements)
+    rlist = cows.List(elements)
     assert list(rlist) == elements
 
 
 @pytest.mark.parametrize('elements', test_set)
 def test_append(elements):
-    rlist = basco.List()
+    rlist = cows.List()
     for element in elements:
         rlist.append(element)
 
@@ -25,7 +25,7 @@ def test_append(elements):
 
 @pytest.mark.parametrize('elements', test_set)
 def test_extend(elements):
-    rlist = basco.List()
+    rlist = cows.List()
 
     rlist.extend(elements)
     rlist.extend(elements)
@@ -35,7 +35,7 @@ def test_extend(elements):
 
 @pytest.mark.parametrize('elements', test_set)
 def test_insert(elements):
-    rlist = basco.List()
+    rlist = cows.List()
 
     for element in elements:
         rlist.insert(0, element)
@@ -52,7 +52,7 @@ def test_insert(elements):
     ]
 ])
 def test_index(elements):
-    rlist = basco.List([e[0] for e in elements])
+    rlist = cows.List([e[0] for e in elements])
     for element, correct_idxs in elements:
         assert rlist.index(element) in correct_idxs
 
@@ -75,14 +75,14 @@ def test_index(elements):
     ]
 ])
 def test_count(elements):
-    rlist = basco.List([e[0] for e in elements])
+    rlist = cows.List([e[0] for e in elements])
     for element, correct_cnt in elements:
         assert rlist.count(element) == correct_cnt
 
 
 @pytest.mark.parametrize('elements', test_set)
 def test_contains(elements):
-    rlist = basco.List(elements)
+    rlist = cows.List(elements)
     for element in elements:
         assert element in rlist
 
@@ -91,11 +91,11 @@ def test_contains(elements):
 
 @pytest.mark.parametrize('elements', test_set)
 def test_reverse(elements):
-    rlist = basco.List(elements)
+    rlist = cows.List(elements)
     rlist.reverse()
     assert list(rlist) == list(reversed(elements))
 
 
 def test_repr():
-    rlist = basco.List(['A', 'B', 'C'])
-    assert rlist.__repr__() == 'basco.List([\'A\', \'B\', \'C\'])'
+    rlist = cows.List(['A', 'B', 'C'])
+    assert rlist.__repr__() == 'cows.List([\'A\', \'B\', \'C\'])'

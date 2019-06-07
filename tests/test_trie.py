@@ -1,6 +1,6 @@
 import pytest
 
-import basco
+import cows
 
 
 @pytest.mark.parametrize(
@@ -10,7 +10,7 @@ import basco
     )
 )
 def test_set(keys):
-    trie = basco.Trie(initialize=[(k, i) for i, k in enumerate(keys)])
+    trie = cows.Trie(initialize=[(k, i) for i, k in enumerate(keys)])
 
     for i, k in enumerate(keys):
         assert trie[k].value == i
@@ -59,20 +59,20 @@ def test_set(keys):
     ]
 )
 def test_ambig_match(inputs, pattern, expected):
-    trie = basco.Trie(initialize=[(k, k) for k in inputs])
+    trie = cows.Trie(initialize=[(k, k) for k in inputs])
     matches = sorted([m[1].value for m in trie.get_matches(pattern)])
     assert matches == sorted(expected)
 
 
 def test_invalid():
-    trie = basco.Trie()
+    trie = cows.Trie()
     with pytest.raises(ValueError):
         list(trie.children_matching('bad'))
 
 
 def test_repr():
-    trie = basco.Trie(key='abc', value=456)
-    assert trie.__repr__() == 'basco.Trie(abc, 456)'
+    trie = cows.Trie(key='abc', value=456)
+    assert trie.__repr__() == 'cows.Trie(abc, 456)'
 
 
 @pytest.mark.parametrize(
@@ -82,7 +82,7 @@ def test_repr():
     ]
 )
 def test_items(inputs):
-    trie = basco.Trie(initialize=inputs)
+    trie = cows.Trie(initialize=inputs)
     inputs = dict(inputs)
 
     assert len(inputs) == len(trie)

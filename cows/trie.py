@@ -4,7 +4,7 @@ _EMPTY = object()
 class Trie:
     """A trie which has accessors for ambiguous lookups.
 
-    This class is the basis of all other basco classes.  It stores *all*
+    This class is the basis of all other cows classes.  It stores *all*
     strings which have been inserted, not taking into account ambiguity.  No
     special methods (starting & ending with double underscores) take into
     account ambiguity.  To search the trie for ambiguous matches, use
@@ -14,9 +14,9 @@ class Trie:
 
         .. code-block:: python
 
-            import basco
+            import cows
 
-            t = basco.Trie()
+            t = cows.Trie()
             t['ABCD'] = 1
             t['DE*G'] = 5
 
@@ -27,8 +27,8 @@ class Trie:
 
         .. code-block:: none
 
-            Matches for ABC* [('ABCD', basco.Trie(D, 1))]
-            Matches for D*FG [('DE*G', basco.Trie(G, 5))]
+            Matches for ABC* [('ABCD', cows.Trie(D, 1))]
+            Matches for D*FG [('DE*G', cows.Trie(G, 5))]
 
     Args:
         key (char): The character representing the trie node.
@@ -38,7 +38,7 @@ class Trie:
         initialize (tuple): Pairs of values with which to initialize the trie.
 
     Note:
-        Consider using the other basco data structures, which are more
+        Consider using the other cows data structures, which are more
         intuitive, before using a Trie.
 
 
@@ -101,7 +101,7 @@ class Trie:
 
     def __repr__(self):
         """Returns the representation of the trie"""
-        return f'basco.Trie({self.key}, {self.value})'
+        return f'cows.Trie({self.key}, {self.value})'
 
     def __len__(self):
         """Returns the number of nodes in the trie"""

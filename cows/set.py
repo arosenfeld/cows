@@ -17,9 +17,9 @@ class Set:
     Example:
         .. code-block:: python
 
-            import basco
+            import cows
 
-            s = basco.Set()
+            s = cows.Set()
             s.add('ABCD')
             s.add('*EFG')
             s.add('T')
@@ -32,7 +32,7 @@ class Set:
 
         .. code-block:: none
 
-            basco.Set(['*EFG', 'ABCD', 'T'])
+            cows.Set(['*EFG', 'ABCD', 'T'])
 
 
     """
@@ -60,4 +60,4 @@ class Set:
 
     def __repr__(self):
         """Returns the representation of the set"""
-        return f'basco.Set({sorted(self.dict.keys())})'
+        return f'cows.Set({sorted(self.dict.keys())})'

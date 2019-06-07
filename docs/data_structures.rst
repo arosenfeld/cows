@@ -5,7 +5,7 @@ Data Structure Reference
 
 Dictionary
 ----------
-.. automodule:: basco.dictionary
+.. automodule:: cows.dictionary
     :members:
     :special-members:
     :private-members:
@@ -13,7 +13,7 @@ Dictionary
 
 List
 ----
-.. automodule:: basco.list
+.. automodule:: cows.list
     :members:
     :special-members:
     :private-members:
@@ -21,7 +21,7 @@ List
 
 Set
 ---
-.. automodule:: basco.set
+.. automodule:: cows.set
     :members:
     :special-members:
     :private-members:
@@ -29,7 +29,7 @@ Set
 
 Trie
 ----
-.. automodule:: basco.trie
+.. automodule:: cows.trie
     :members:
     :special-members:
     :private-members:
