@@ -57,5 +57,6 @@ html_theme_options = {
     'github_user': 'arosenfeld',
     'github_repo': 'basco',
     'description': 'Simple, efficient collections for strings with wilcards',
-    'fixed_sidebar': True
+    'fixed_sidebar': True,
+    'sidebar_collapse': False
 }

@@ -15,6 +15,7 @@ def test_set(keys):
     for i, k in enumerate(keys):
         assert trie[k].value == i
 
+    assert list(sorted(trie)) == list(sorted(keys))
 
 @pytest.mark.parametrize(
     'inputs,pattern,expected',

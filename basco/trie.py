@@ -2,15 +2,13 @@ _EMPTY = object()
 
 
 class Trie:
-    """Creates a trie which stores strings potentially containing ambiguous
-    (i.e. wildcard) characters.  Inserting into the trie is essentially the
-    same as a normal trie, but lookups take into account the ambiguous
-    character both in the query string and strings to be matched
+    """A trie which has accessors for ambiguous lookups.
 
-    Example:
-        Trie containing the strings ``ATCG``, ``A*TT``, and ``A*CG``
-        when queried with ``get_matches('*TCG')`` will return ``ATCG`` and
-        ``A*CG``.
+    This class is the basis of all other basco classes.  It stores *all*
+    strings which have been inserted, not taking into account ambiguity.  No
+    special methods (starting & ending with double underscores) take into
+    account ambiguity.  To search the trie for ambiguous matches, use
+    :meth:`.get_matches`.
 
     Args:
         key (char): The character representing the trie node.
@@ -18,6 +16,10 @@ class Trie:
             trie node.
         wildcard (char): The character representing ambiguity.
         initialize (tuple): Pairs of values with which to initialize the trie.
+
+    Note:
+        Consider using the other basco data structures, which are more
+        intuitive, before using a Trie.
 
 
     """
@@ -33,6 +35,19 @@ class Trie:
                 self[init_key] = init_val
 
     def __getitem__(self, key):
+        """Gets an item from the trie.
+
+        Searches the trie for ``key``.  Note this does **not** take into
+        account ambiguity, and will only find an exact match.  For ambiguous
+        searching, use :meth:`.get_matches`.
+
+        Args:
+            key (str): The key to search for
+
+        Returns:
+            The matching :class:`.Trie` node if ``key`` was found, else
+            ``None``
+        """
         node = self
         while True:
             if not key:
@@ -42,6 +57,17 @@ class Trie:
             key = rest
 
     def __setitem__(self, key, value):
+        """Sets a key/value pair in the trie.
+
+        Sets the value of ``key`` to ``value``.  Note this will affect exactly
+        one trie node and does not take into account ambiguity.  For a data
+        structure that implements setting with ambiguity use :class:`.Dict`.
+
+        Args:
+            key (str): The key to set.
+            value (obj): The data to associate with ``key``
+
+        """
         node = self
         while True:
             prefix, rest = key[0], key[1:]
@@ -54,15 +80,22 @@ class Trie:
             key = rest
 
     def __repr__(self):
+        """Returns the representation of the trie"""
         return f'basco.Trie({self.key}, {self.value})'
 
     def __len__(self):
+        """Returns the number of nodes in the trie"""
         return len(list(self.items()))
 
+    def __iter__(self):
+        yield from self.keys()
+
     def keys(self):
+        """Yields the keys in the trie"""
         yield from (item[0] for item in self.items())
 
     def values(self, extract_values=False):
+        """Yields the values in the trie"""
         yield from (
             item[1] for item in self.items(extract_values=extract_values)
         )
@@ -114,7 +147,8 @@ class Trie:
 
         """
         if not (isinstance(prefix, str) and len(prefix) == 1):
-            raise ValueError('Prefix must be a single character')
+            raise ValueError(
+                f'Prefix must be a single character, not {prefix}')
 
         if prefix == self.wildcard:
             yield from self.children.values()
@@ -149,6 +183,7 @@ class Trie:
             prev, key, node = next_visit
             prefix, rest = key[0], key[1:]
             matching_children = node.children_matching(prefix)
+
             if not rest:
                 yield from [
                     (prev + c.key, c) for c in matching_children

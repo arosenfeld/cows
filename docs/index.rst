@@ -3,9 +3,8 @@ basco
 
 .. toctree::
     :hidden:
-    :maxdepth: 2
 
-    api
+    data_structures
 
 **basco** (**b**\ idirectional **a**\ mbiguous **s**\ tring **co**\ llections)
 is a Python library that provides efficient ``set``- and ``dict``-like

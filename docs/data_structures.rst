@@ -1,5 +1,5 @@
-API Documentation
-=================
+Data Structure Reference
+========================
 
 Dictionary
 ----------

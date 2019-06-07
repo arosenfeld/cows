@@ -37,10 +37,9 @@ class Set:
 
     """
     def __init__(self, iterable=None, **kwargs):
-        self.dict = Dict(**kwargs)
-        if iterable:
-            for element in iterable:
-                self.dict[element] = True
+        self.dict = Dict(initialize=[
+            (element, True) for element in iterable
+        ] if iterable else None, **kwargs)
 
     def add(self, element):
         """Adds an element to the set.
@@ -61,4 +60,4 @@ class Set:
 
     def __repr__(self):
         """Returns the representation of the set"""
-        return f'basco.Set({sorted(list(self.dict.keys()))})'
+        return f'basco.Set({sorted(self.dict.keys())})'
