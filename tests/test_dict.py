@@ -42,5 +42,5 @@ def test_update(keys, expected):
         assert next(rdict[k]) == v
 
 def test_repr():
-    trie = basco.Dict()
-    assert trie.__repr__() == 'basco.Dict()'
+    rdict = basco.Dict()
+    assert rdict.__repr__() == 'basco.Dict()'
