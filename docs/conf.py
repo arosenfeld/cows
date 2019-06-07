@@ -56,7 +56,7 @@ html_static_path = ['_static']
 html_theme_options = {
     'github_user': 'arosenfeld',
     'github_repo': 'basco',
-    'description': 'Simple, efficient collections for strings with wilcards',
+    'description': 'Simple, efficient collections for strings with wildcards',
     'fixed_sidebar': True,
     'sidebar_collapse': False
 }
