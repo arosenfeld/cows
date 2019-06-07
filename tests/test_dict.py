@@ -14,45 +14,32 @@ import basco
 )
 def test_initialize(keys, expected):
     rdict = basco.Dict(initialize=[(k, k) for k in keys])
-    assert sorted(rdict.values()) == sorted(expected)
+    assert sorted(rdict.keys()) == sorted(expected)
 
 
 @pytest.mark.parametrize(
     'keys,expected',
     [
         (
-            ('ATCG', 'GCTA', 'TTNA', 'TNGA', 'NNNN'),
-            {'TTNA': 2, 'GCTA': 2, 'ATCG': 1}
+            (('ATCG', 1), ('GCTA', 2), ('TTNA', 3), ('TNGA', 4), ('NNNN', 5)),
+            {'ATCG': 6, 'GCTA': 2, 'TTNA': 7}
         )
     ]
 )
 def test_update(keys, expected):
-    def _updater(selected):
-        selected.counter += 1
+    def incr(match, current_value, new_value):
+        return current_value + new_value
 
-    class _TestObj:
-        def __init__(self, key):
-            self.key = key
-            self.counter = 1
+    rdict = basco.Dict(updater=incr, initialize=keys)
 
-        def incr(self):
-            self.counter += 1
-
-        def __gt__(self, other):
-            return self.counter > other.counter
-
-    rdict = basco.Dict(
-        updater=_updater,
-        initialize=[(k, _TestObj(k)) for k in keys]
-    )
     assert len(rdict) == len(expected)
-    for obj in rdict.values():
-        assert obj.counter == expected[obj.key]
+    for key, value in rdict.items():
+        assert expected[key] == value
 
     for k, v in expected.items():
-        assert len(list(rdict[k])) == 1
-        assert next(rdict[k]).counter == v
-
+        vals = list(rdict[k])
+        assert len(vals) == 1
+        assert next(rdict[k]) == v
 
 def test_repr():
     trie = basco.Dict()
