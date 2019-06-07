@@ -13,6 +13,7 @@ def test_initialize(keys, expected):
     rset = basco.Set(keys)
     assert sorted(rset) == sorted(expected)
 
+
 @pytest.mark.parametrize(
     'keys,expected', test_set
 )

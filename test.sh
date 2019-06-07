@@ -2,5 +2,5 @@
 
 pytest --cov=basco -s -v tests/ --tb=native
 
-pycodestyle basco
+pycodestyle basco tests
 pylint basco

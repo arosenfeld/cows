@@ -32,6 +32,7 @@ def test_extend(elements):
 
     assert list(rlist) == elements * 2
 
+
 @pytest.mark.parametrize('elements', test_set)
 def test_insert(elements):
     rlist = basco.List()
@@ -78,6 +79,7 @@ def test_count(elements):
     for element, correct_cnt in elements:
         assert rlist.count(element) == correct_cnt
 
+
 @pytest.mark.parametrize('elements', test_set)
 def test_contains(elements):
     rlist = basco.List(elements)
@@ -92,6 +94,7 @@ def test_reverse(elements):
     rlist = basco.List(elements)
     rlist.reverse()
     assert list(rlist) == list(reversed(elements))
+
 
 def test_repr():
     rlist = basco.List(['A', 'B', 'C'])

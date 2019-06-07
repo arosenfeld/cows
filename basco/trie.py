@@ -10,6 +10,26 @@ class Trie:
     account ambiguity.  To search the trie for ambiguous matches, use
     :meth:`.get_matches`.
 
+    Example:
+
+        .. code-block:: python
+
+            import basco
+
+            t = basco.Trie()
+            t['ABCD'] = 1
+            t['DE*G'] = 5
+
+            print(f'Matches for ABC* {list(t.get_matches("ABC*"))}')
+            print(f'Matches for D*FG {list(t.get_matches("D*FG"))}')
+
+        Outputs:
+
+        .. code-block:: none
+
+            Matches for ABC* [('ABCD', basco.Trie(D, 1))]
+            Matches for D*FG [('DE*G', basco.Trie(G, 5))]
+
     Args:
         key (char): The character representing the trie node.
         value (object): An arbitrary Python object representing the data at the

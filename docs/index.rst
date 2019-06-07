@@ -47,6 +47,23 @@ Below are examples for the data structures included with basco.  Please see the
 documentation in :ref:`data-structures` for detailed
 API information.
 
+``basco.List``
+^^^^^^^^^^^^^^
+
+A :class:`basco.list` is a simple list implementation where insertion functions
+similarly to the builtin ``list`` data structure, but accessor methods take
+into account ambiguity.  For example:
+
+.. code-block:: python
+
+    l = basco.List(['ABCD', 'ABC*', '****', 'DEFG'])
+
+    print(l.index('D***'))
+
+The of the print statement is ``2`` since the first match for ``D***`` is at
+position 2 (with a value of ``****``).
+
+
 ``basco.Set``
 ^^^^^^^^^^^^^
 
@@ -112,6 +129,37 @@ Produces:
 
     ABC --> 11
     DEF --> 2
+
+basco.Trie
+^^^^^^^^^^
+.. note::
+
+    Generally the :class:`basco.trie` data structure shouldn't be used
+    directly.  Consider using one of its abstractions.
+
+All other basco data structures are based on the :class:`basco.trie` class.  It
+allows for ambiguous queries taking into account wildcards both in the query
+string and elements in the trie.
+
+An example of it's use:
+
+.. code-block:: python
+
+    import basco
+
+    t = basco.Trie()
+    t['ABCD'] = 1
+    t['DE*G'] = 5
+
+    print(f'Matches for ABC* {list(t.get_matches("ABC*"))}')
+    print(f'Matches for D*FG {list(t.get_matches("D*FG"))}')
+
+Outputs:
+
+.. code-block:: none
+
+    Matches for ABC* [('ABCD', basco.Trie(D, 1))]
+    Matches for D*FG [('DE*G', basco.Trie(G, 5))]
 
 
 Performance

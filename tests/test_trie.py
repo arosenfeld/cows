@@ -17,6 +17,7 @@ def test_set(keys):
 
     assert list(sorted(trie)) == list(sorted(keys))
 
+
 @pytest.mark.parametrize(
     'inputs,pattern,expected',
     [

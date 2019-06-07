@@ -42,7 +42,6 @@ def test_update(keys, expected):
     for key in rdict:
         assert [expected[key]] == list(rdict[key])
 
-
     for k, v in expected.items():
         vals = list(rdict[k])
         assert len(vals) == 1
@@ -52,4 +51,3 @@ def test_update(keys, expected):
 def test_repr():
     rdict = basco.Dict()
     assert rdict.__repr__() == 'basco.Dict()'
-
