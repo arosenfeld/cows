@@ -102,14 +102,14 @@ Produces:
 ^^^^^^^^^^^^^^
 
 cows dictionaries are similar to the builtin ``dict`` type insofar as they are
-key/value stores.  They have a few key differences, however
+key/value stores.  They have a few key differences, however.
 
 First, when setting a value, if there is an existing (potentially ambiguous)
 match already in the dictionary, you can set an ``updater`` function to update
-the existing value, rather than simply overwrite it.  Further, when inserting a
-key, because of ambiguity, multiple existing keys may match.  Providing a
-``selector`` function lets you define to which of the matches the ``updater``
-should be applied.
+the existing value rather than simply overwrite it.  Further, when inserting a
+key/value pair, multiple existing keys may match the new key due to ambiguity.
+Specifying a ``selector`` function at instantiation lets you define to which of
+the matches the ``updater`` should be applied.
 
 See :class:`cows.dictionary` for more detailed information.
 
