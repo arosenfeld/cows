@@ -43,6 +43,10 @@ scale linearly with the number of sequences.
 Provided Data Structures
 ------------------------
 
+Below are examples for the data structures included with basco.  Please see the
+documentation in :ref:`data-structures` for detailed
+API information.
+
 ``basco.Set``
 ^^^^^^^^^^^^^
 

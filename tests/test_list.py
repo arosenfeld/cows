@@ -58,6 +58,9 @@ def test_index(elements):
     with pytest.raises(ValueError):
         rlist.index('XXX')
 
+    for element, correct_idxs in elements:
+        assert rlist.index(element) in correct_idxs
+
 
 @pytest.mark.parametrize('elements', [
     [
