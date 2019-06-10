@@ -126,7 +126,7 @@ See :class:`cows.dictionary` for more detailed information.
     my_dict['AB*'] = 10
 
     for k, v in sorted(my_dict.items()):
-        print(f'{k} --> {v}')
+        print('{} --> {}'.format(k, v))
 
 Produces:
 
@@ -156,8 +156,8 @@ An example of it's use:
     t['ABCD'] = 1
     t['DE*G'] = 5
 
-    print(f'Matches for ABC* {list(t.get_matches("ABC*"))}')
-    print(f'Matches for D*FG {list(t.get_matches("D*FG"))}')
+    print('Matches for ABC* {}'.format(list(t.get_matches("ABC*"))))
+    print('Matches for D*FG {}'.format(list(t.get_matches("D*FG"))))
 
 Outputs:
 

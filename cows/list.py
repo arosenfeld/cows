@@ -28,7 +28,7 @@ class List:
         print(l.index('D***'))
         # prints: 2
 
-        print(l.count('A***'))  # 3
+        print(l.count('A***'))
         # prints: 3
     """
     def __init__(self, iterable=None):
@@ -47,7 +47,7 @@ class List:
 
     def __repr__(self):
         """Returns the representation of the list"""
-        return f'cows.List({[e for e in self]})'
+        return 'cows.List({})'.format([e for e in self])
 
     def __len__(self):
         """Returns the number of elements in the list"""
@@ -114,7 +114,7 @@ class List:
                 if match in self.list[start:end]
             ])
         except ValueError:
-            raise ValueError(f'No matches for {value} found')
+            raise ValueError('No matches for {} found'.format(value))
 
     def count(self, value):
         """Counts the number of times ``value`` occurs in the list.

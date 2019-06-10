@@ -60,4 +60,4 @@ class Set:
 
     def __repr__(self):
         """Returns the representation of the set"""
-        return f'cows.Set({sorted(self.dict.keys())})'
+        return 'cows.Set({})'.format(sorted(self.dict.keys()))

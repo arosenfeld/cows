@@ -45,7 +45,7 @@ class Dict:
             my_dict['AB*'] = 10
 
             for k, v in sorted(my_dict.items()):
-                print(f'{k} --> {v}')
+                print('{} --> {}'.format(k, v))
 
         This code would output:
 
@@ -184,4 +184,4 @@ class Dict:
 
     def __repr__(self):
         """Returns the representation of the dictionary"""
-        return f'cows.Dict()'
+        return 'cows.Dict()'

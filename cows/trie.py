@@ -20,8 +20,8 @@ class Trie:
             t['ABCD'] = 1
             t['DE*G'] = 5
 
-            print(f'Matches for ABC* {list(t.get_matches("ABC*"))}')
-            print(f'Matches for D*FG {list(t.get_matches("D*FG"))}')
+            print('Matches for ABC* {}'.format(list(t.get_matches("ABC*"))))
+            print('Matches for D*FG {}'.format(list(t.get_matches("D*FG"))))
 
         Outputs:
 
@@ -101,7 +101,7 @@ class Trie:
 
     def __repr__(self):
         """Returns the representation of the trie"""
-        return f'cows.Trie({self.key}, {self.value})'
+        return 'cows.Trie({}, {})'.format(self.key, self.value)
 
     def __len__(self):
         """Returns the number of nodes in the trie"""
@@ -168,7 +168,7 @@ class Trie:
         """
         if not (isinstance(prefix, str) and len(prefix) == 1):
             raise ValueError(
-                f'Prefix must be a single character, not {prefix}')
+                'Prefix must be a single character, not {}'.format(prefix))
 
         if prefix == self.wildcard:
             yield from self.children.values()
